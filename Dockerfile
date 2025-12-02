@@ -17,7 +17,11 @@ FROM eclipse-temurin:21-jre
 WORKDIR /app
 
 # Copy built jar from the previous stage
-COPY --from=build /app/target/expensetracker-0.0.1-SNAPSHOT.jar app.jar
+# Option 1: Explicit name
+COPY --from=build /app/target/expense-tracker-0.0.1-SNAPSHOT.jar app.jar
+
+# Option 2: Wildcard (safer if JAR name changes)
+# COPY --from=build /app/target/*.jar app.jar
 
 # Set environment variables
 ENV MONGO_URI=${MONGO_URI}
